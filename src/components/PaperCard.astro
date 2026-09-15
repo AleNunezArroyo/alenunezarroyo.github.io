@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"research">["data"];
+
+// Name variants used across publications; add new spellings here to keep them highlighted.
+const SITE_AUTHOR_NAMES = ["Alejandro N. Arroyo", "Alejandro Núñez Arroyo"];
+
+const { title, authors, venue, year, image, imageAlt, links, tldr } =
+  Astro.props;
+---
+
+<li
+  class="border-border flex flex-col gap-3 border-b pb-6 last:border-0 last:pb-0"
+>
+  {
+    image && (
+      <div class="border-border overflow-hidden rounded-md border">
+        <Image src={image} alt={imageAlt ?? title} class="w-full" />
+      </div>
+    )
+  }
+
+  <h2 class="text-lg font-semibold">{title}</h2>
+
+  <p class="text-sm opacity-80">
+    {
+      authors.map((author, index) => (
+        <Fragment>
+          {index > 0 && ", "}
+          {SITE_AUTHOR_NAMES.includes(author) ? (
+            <span class="text-accent">{author}</span>
+          ) : (
+            author
+          )}
+        </Fragment>
+      ))
+    }
+  </p>
+
+  <p class="text-accent font-medium">{venue} {year}</p>
+
+  {
+    links.length > 0 && (
+      <ul class="flex flex-wrap gap-2">
+        {links.map(({ label, url }, index) => (
+          <li>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={[
+                "focus-outline inline-block rounded-md px-3 py-1 text-sm font-medium transition-colors",
+                index === 0
+                  ? "bg-accent text-accent-foreground hover:opacity-90"
+                  : "bg-muted hover:bg-accent hover:text-accent-foreground",
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    tldr && (
+      <p class="border-s-accent/80 border-s-2 ps-3 italic opacity-80">{tldr}</p>
+    )
+  }
+</li>

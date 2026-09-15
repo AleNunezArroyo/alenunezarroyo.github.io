@@ -24,6 +24,24 @@ const posts = defineCollection({
     }),
 });
 
+const research = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/research" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      authors: z.array(z.string()),
+      venue: z.string(),
+      year: z.number(),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      links: z
+        .array(z.object({ label: z.string(), url: z.string() }))
+        .default([]),
+      tldr: z.string().optional(),
+      draft: z.boolean().optional(),
+    }),
+});
+
 const pages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
   schema: z.object({
@@ -34,4 +52,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+export const collections = { posts, research, pages };
