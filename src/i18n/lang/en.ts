@@ -7,6 +7,7 @@ export default {
     tags: "Tags",
     about: "About",
     links: "Links",
+    research: "Research",
     archives: "Archives",
     search: "Search",
   },
@@ -56,6 +57,9 @@ export default {
 
     linksTitle: "Links",
     linksDesc: "All my social links in one place.",
+
+    researchTitle: "Research",
+    researchDesc: "Papers and publications I've worked on.",
   },
   a11y: {
     skipToContent: "Skip to content",
