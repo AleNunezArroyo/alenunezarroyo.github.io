@@ -4,7 +4,6 @@ export default {
   nav: {
     home: "Home",
     posts: "Posts",
-    tags: "Tags",
     about: "About",
     research: "Research",
     archives: "Archives",
@@ -39,11 +38,7 @@ export default {
     allRightsReserved: "All rights reserved.",
   },
   pages: {
-    tagTitle: "Tag",
     tagDesc: "All the articles with the tag",
-
-    tagsTitle: "Tags",
-    tagsDesc: "All the tags used in posts.",
 
     postsTitle: "Posts",
     postsDesc: "All the articles I've posted.",
