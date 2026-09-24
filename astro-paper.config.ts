@@ -2,14 +2,15 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://astro-paper.pages.dev/",
+    url: "https://alenunezarroyo.github.io/",
     title: "Alejandro Núñez Arroyo",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
+    description:
+      "Alejandro Núñez Arroyo — research on LLM-based agents and multi-agent systems.",
     author: "Alejandro Núñez Arroyo",
-    profile: "https://satna.ing",
+    profile: "https://www.linkedin.com/in/alejandronunezarroyo/",
     ogImage: "default-og.jpg",
     lang: "en",
-    timezone: "Asia/Bangkok",
+    timezone: "America/Sao_Paulo",
     dir: "ltr",
   },
   posts: {
@@ -24,7 +25,7 @@ export default defineAstroPaperConfig({
     showBackButton: true,
     editPost: {
       enabled: true,
-      url: "https://github.com/satnaing/astro-paper/edit/main/",
+      url: "https://github.com/AleNunezArroyo/alenunezarroyo.github.io/edit/main/",
     },
     search: "pagefind",
   },
