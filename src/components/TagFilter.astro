@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Tag from "./Tag.astro";
+import { getUniqueTags } from "@/utils/getUniqueTags";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+type Props = {
+  /** Slug of the selected tag; omit when showing all posts. */
+  activeTag?: string;
+};
+
+const { activeTag } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const tags = getUniqueTags(posts);
+---
+
+<ul class="border-border mb-6 flex flex-wrap gap-x-6 gap-y-3 border-b pb-6">
+  <Tag
+    tag="all-posts"
+    tagName={t.pages.allTags}
+    href={getRelativeLocaleUrl(locale, "posts/")}
+    active={!activeTag}
+  />
+  {
+    tags.map(({ tag, tagName }) => (
+      <Tag
+        {tag}
+        {tagName}
+        href={getRelativeLocaleUrl(locale, `posts/tag/${tag}/`)}
+        active={tag === activeTag}
+      />
+    ))
+  }
+</ul>

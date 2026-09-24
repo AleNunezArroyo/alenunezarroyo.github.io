@@ -45,6 +45,7 @@ export interface UIStrings {
 
     postsTitle: string;
     postsDesc: string;
+    allTags: string;
 
     archivesTitle: string;
     archivesDesc: string;
