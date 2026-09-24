@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -25,6 +25,9 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
+
+const about = await getEntry("pages", "about");
+const AboutContent = about ? (await render(about)).Content : null;
 
 // Drop a photo at src/assets/images/avatar.{jpg,jpeg,png,webp} to show it in the hero.
 const avatarImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -101,6 +104,17 @@ const initials = config.site.author
         )}
       </div>
     </section>
+
+    {
+      AboutContent && (
+        <section id="about" class="border-border border-b pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">{t.nav.about}</h2>
+          <div class="app-prose mt-4 max-w-none">
+            <AboutContent />
+          </div>
+        </section>
+      )
+    }
 
     {
       featuredPosts.length > 0 && (
