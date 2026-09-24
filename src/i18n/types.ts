@@ -52,7 +52,6 @@ export interface UIStrings {
     searchTitle: string;
     searchDesc: string;
 
-
     researchTitle: string;
     researchDesc: string;
   };

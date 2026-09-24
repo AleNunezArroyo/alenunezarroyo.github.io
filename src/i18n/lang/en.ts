@@ -54,7 +54,6 @@ export default {
     searchTitle: "Search",
     searchDesc: "Search any article ...",
 
-
     researchTitle: "Research",
     researchDesc: "Papers and publications I've worked on.",
   },

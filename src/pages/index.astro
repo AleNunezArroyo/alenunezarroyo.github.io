@@ -97,11 +97,13 @@ const initials = config.site.author
           Researching LLM-based agents and multi-agent systems. Papers, notes
           and experiments along the way.
         </p>
-        {socials.length > 0 && (
-          <div class="mt-3 -ms-2 sm:-ms-1">
-            <Socials />
-          </div>
-        )}
+        {
+          socials.length > 0 && (
+            <div class="-ms-2 mt-3 sm:-ms-1">
+              <Socials />
+            </div>
+          )
+        }
       </div>
     </section>
 
