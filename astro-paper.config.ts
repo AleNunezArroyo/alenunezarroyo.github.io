@@ -3,9 +3,9 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://astro-paper.pages.dev/",
-    title: "AstroPaper",
+    title: "Alejandro Núñez Arroyo",
     description: "A minimal, responsive and SEO-friendly Astro blog theme.",
-    author: "Sat Naing",
+    author: "Alejandro Núñez Arroyo",
     profile: "https://satna.ing",
     ogImage: "default-og.jpg",
     lang: "en",
@@ -32,7 +32,6 @@ export default defineAstroPaperConfig({
     { name: "linkedin",  url: "https://www.linkedin.com/in/alejandronunezarroyo/", linkTitle: "LinkedIn" },
     { name: "instagram", url: "https://www.instagram.com/alenunezarroyo/",         linkTitle: "Instagram" },
     { name: "x",         url: "https://x.com/alenunezarroyo/",                     linkTitle: "X" },
-    { name: "tiktok",    url: "https://www.tiktok.com/@alenunezarroyo",            linkTitle: "TikTok" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },

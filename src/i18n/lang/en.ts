@@ -6,7 +6,6 @@ export default {
     posts: "Posts",
     tags: "Tags",
     about: "About",
-    links: "Links",
     research: "Research",
     archives: "Archives",
     search: "Search",
@@ -54,9 +53,6 @@ export default {
 
     searchTitle: "Search",
     searchDesc: "Search any article ...",
-
-    linksTitle: "Links",
-    linksDesc: "All my social links in one place.",
 
     researchTitle: "Research",
     researchDesc: "Papers and publications I've worked on.",
