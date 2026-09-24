@@ -32,7 +32,6 @@ export default defineAstroPaperConfig({
     { name: "linkedin",  url: "https://www.linkedin.com/in/alejandronunezarroyo/", linkTitle: "LinkedIn" },
     { name: "instagram", url: "https://www.instagram.com/alenunezarroyo/",         linkTitle: "Instagram" },
     { name: "x",         url: "https://x.com/alenunezarroyo/",                     linkTitle: "X" },
-    { name: "tiktok",    url: "https://www.tiktok.com/@alenunezarroyo",            linkTitle: "TikTok" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },
