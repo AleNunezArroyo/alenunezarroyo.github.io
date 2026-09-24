@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
@@ -23,6 +25,18 @@ const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const homePath = getRelativeLocaleUrl(locale, "");
+
+// Drop a photo at src/assets/images/avatar.{jpg,jpeg,png,webp} to show it in the hero.
+const avatarImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/avatar.{jpg,jpeg,png,webp}",
+  { eager: true }
+);
+const avatar = Object.values(avatarImages)[0]?.default;
+const initials = config.site.author
+  .split(" ")
+  .map(word => word[0])
+  .slice(0, 2)
+  .join("");
 ---
 
 <Layout>
@@ -33,51 +47,59 @@ const homePath = getRelativeLocaleUrl(locale, "");
     data-home-path={homePath}
     class="app-layout my-1"
   >
-    <section id="hero" class="border-border border-b pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
-      </h1>
-      <a
-        target="_blank"
-        href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-        class="inline-block"
-        aria-label="RSS Feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p class="mt-2">
-        Read the blog posts or check{" "}
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton>{" "}
-        for more info.
-      </p>
+    <section
+      id="hero"
+      class="border-border flex flex-col gap-6 border-b pt-8 pb-8 sm:flex-row sm:items-center sm:gap-8"
+    >
       {
-        socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
-              {t.home.socialLinks}:
-            </div>
-            <Socials />
+        avatar ? (
+          <Image
+            src={avatar}
+            alt={config.site.author}
+            width={320}
+            height={320}
+            loading="eager"
+            class="size-32 shrink-0 rounded-full object-cover sm:size-40"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            class="bg-muted text-accent flex size-32 shrink-0 items-center justify-center rounded-full text-4xl font-bold sm:size-40 sm:text-5xl"
+          >
+            {initials}
           </div>
         )
       }
+
+      <div>
+        <h1 class="inline-block text-3xl font-bold sm:text-4xl">
+          Hi, I'm @alenunezarroyo.
+        </h1>
+        <a
+          target="_blank"
+          href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
+          class="inline-block"
+          aria-label="RSS Feed"
+          title="RSS Feed"
+        >
+          <IconRss
+            width={20}
+            height={20}
+            class="stroke-accent ms-2 scale-125 stroke-3 rtl:-rotate-90"
+          />
+          <span class="sr-only">RSS Feed</span>
+        </a>
+
+        <p class="mt-3">
+          Researching LLM-based agents and multi-agent systems. Papers, notes
+          and experiments along the way.
+        </p>
+        {socials.length > 0 && (
+          <div class="mt-3 -ms-2 sm:-ms-1">
+            <Socials />
+          </div>
+        )}
+      </div>
     </section>
 
     {
