@@ -3,11 +3,12 @@ import { getCollection } from "astro:content";
 import type { GetStaticPathsOptions } from "astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
-import Main from "@/components/Main.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
 import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import Pagination from "@/components/Pagination.astro";
+import TagFilter from "@/components/TagFilter.astro";
 import { getUniqueTags } from "@/utils/getUniqueTags";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyAll } from "@/utils/slugify";
@@ -25,27 +26,28 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
     return paginate(tagPosts, {
       params: { tag },
-      props: { tagName },
+      props: { tag, tagName },
       pageSize: config.posts.perPage,
     });
   });
 }
 
-const { page, tagName } = Astro.props;
+const { page, tag, tagName } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
 ---
 
-<Layout title={`${t.pages.tagTitle}: ${tagName} | ${config.site.title}`}>
+<Layout title={`${t.pages.postsTitle}: ${tagName} | ${config.site.title}`}>
   <Header />
 
   <Breadcrumb />
 
   <Main
-    pageTitle={`${t.pages.tagTitle}: ${tagName}`}
+    pageTitle={t.pages.postsTitle}
     pageDesc={`${t.pages.tagDesc} "${tagName}".`}
   >
+    <TagFilter activeTag={tag} />
     <ul>
       {page.data.map(data => <Card {...data} />)}
     </ul>

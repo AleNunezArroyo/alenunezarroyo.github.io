@@ -21,6 +21,10 @@ import config from "./astro-paper.config";
 
 export default defineConfig({
   site: config.site.url,
+  redirects: {
+    "/tags": "/posts",
+    "/tags/[tag]/[...page]": "/posts/tag/[tag]/[...page]",
+  },
   integrations: [
     mdx(),
     sitemap({
